@@ -1,40 +1,88 @@
 {% extends "base.html" %}
 
 {% block title %}
-{{ product["name"] }} - DevOpsMart
+{{ product["name"] }} | DevOpsMart
 {% endblock %}
 
 {% block content %}
 
-<div class="product-detail">
+<div class="product-page">
 
-    <div class="product-icon large">
-        ⚙️
+    <div class="product-breadcrumb">
+        <a href="/products">Products</a>
+        <span>/</span>
+        <span>{{ product["name"] }}</span>
     </div>
 
-    <div>
+    <section class="product-detail">
 
-        <h1>{{ product["name"] }}</h1>
+        <div class="product-visual">
 
-        <p class="category">
-            {{ product["category"] }}
-        </p>
+            <div class="product-visual-label">
+                DEVOPS TECHNOLOGY
+            </div>
 
-        <p>
-            {{ product["description"] }}
-        </p>
+            <div class="product-main-icon">
+                <div class="tech-monogram">{{ product["name"][0:2]|upper }}</div>
+                <div class="tech-label">{{ product["name"]|upper }}</div>
+                <div class="tech-type">{{ product["category"]|upper }}</div>
+            </div>
 
-        <h2>
-            ${{ "%.2f"|format(product["price"]) }}
-        </h2>
+            <div class="product-visual-name">
+                {{ product["name"] }}
+            </div>
 
-        <form method="POST" action="/cart/add/{{ product['id'] }}">
-            <button type="submit" class="button">
-                Add to Cart
-            </button>
-        </form>
+        </div>
 
-    </div>
+        <div class="product-info">
+
+            <span class="product-category">
+                {{ product["category"] }}
+            </span>
+
+            <h1>{{ product["name"] }}</h1>
+
+            <p class="product-description">
+                {{ product["description"] }}
+            </p>
+
+            <div class="product-meta">
+
+                <div>
+                    <span>Category</span>
+                    <strong>{{ product["category"] }}</strong>
+                </div>
+
+                <div>
+                    <span>Platform</span>
+                    <strong>DevOps</strong>
+                </div>
+
+            </div>
+
+            <div class="product-purchase">
+
+                <div class="product-price">
+                    <span>Toolkit Price</span>
+                    <strong>
+                        ${{ "%.2f"|format(product["price"]) }}
+                    </strong>
+                </div>
+
+                <form method="POST"
+                      action="/cart/add/{{ product['id'] }}">
+
+                    <button type="submit" class="add-toolkit-button">
+                        Add to Toolkit →
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </section>
 
 </div>
 

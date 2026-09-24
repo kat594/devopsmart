@@ -1,67 +1,102 @@
 {% extends "base.html" %}
 
 {% block title %}
-DevOpsMart - DevOps & Cloud Marketplace
+DevOpsMart | DevOps Technology Platform
 {% endblock %}
 
 {% block content %}
 
-<section class="hero">
+<section class="home-hero">
 
-    <div class="hero-content">
+    <div class="hero-copy">
 
-        <div class="hero-badge">
-            ⚡ DEVOPS & CLOUD MARKETPLACE
+        <div class="hero-kicker">
+            <span class="status-dot"></span>
+            DEVOPS TECHNOLOGY PLATFORM
         </div>
 
         <h1>
-            Build. Deploy.
-            <span>Scale.</span>
+            Build your
+            <span>DevOps stack.</span>
         </h1>
 
-        <p>
-            Explore the technologies powering modern DevOps,
-            cloud infrastructure, automation, and observability.
+        <p class="hero-description">
+            Explore the technologies behind modern software delivery,
+            cloud infrastructure, automation, containers, and observability.
         </p>
 
-        <div class="hero-buttons">
+        <div class="hero-actions">
 
-            <a href="/products" class="button">
-                Explore DevOps Tools
+            <a href="/products" class="primary-action">
+                Explore Technologies
+                <span>→</span>
             </a>
 
-            <a href="/api/products" class="button secondary-button">
-                View API
+            <a href="/health" class="secondary-action">
+                System Health
             </a>
+
+        </div>
+
+        <div class="hero-stats">
+
+            <div>
+                <strong>12+</strong>
+                <span>Technologies</span>
+            </div>
+
+            <div>
+                <strong>6</strong>
+                <span>Categories</span>
+            </div>
+
+            <div>
+                <strong>100%</strong>
+                <span>Hands-on</span>
+            </div>
 
         </div>
 
     </div>
 
-    <div class="floating-orbit">
 
-        <div class="floating-card card-one">
-            🐳
-            <span>Docker</span>
+    <div class="devops-visual">
+
+        <div class="visual-glow"></div>
+
+        <div class="orbit orbit-one"></div>
+        <div class="orbit orbit-two"></div>
+
+        <div class="tech-node node-docker">
+            <span>🐳</span>
+            Docker
         </div>
 
-        <div class="floating-card card-two">
-            ☸️
-            <span>Kubernetes</span>
+        <div class="tech-node node-kubernetes">
+            <span>☸️</span>
+            Kubernetes
         </div>
 
-        <div class="floating-card card-three">
-            ☁️
-            <span>Cloud</span>
+        <div class="tech-node node-cloud">
+            <span>☁️</span>
+            Cloud
         </div>
 
-        <div class="floating-card card-four">
-            📊
-            <span>Observability</span>
+        <div class="tech-node node-monitoring">
+            <span>📊</span>
+            Observability
         </div>
 
-        <div class="orbit-center">
-            ⚙️
+        <div class="visual-center">
+
+            <div class="terminal-icon">
+                &gt;_
+            </div>
+
+            <strong>DevOpsMart</strong>
+
+            <span>Build • Deploy • Scale</span>
+
         </div>
 
     </div>
@@ -69,54 +104,140 @@ DevOpsMart - DevOps & Cloud Marketplace
 </section>
 
 
-<section class="featured-section">
+<section class="home-section">
 
-    <div class="section-heading">
+    <div class="section-header">
 
         <div>
-            <p class="section-label">EXPLORE THE ECOSYSTEM</p>
-            <h2>Featured DevOps Tools</h2>
+            <span class="section-kicker">
+                TECHNOLOGY ECOSYSTEM
+            </span>
+
+            <h2>
+                Everything you need to build modern platforms.
+            </h2>
         </div>
 
-        <a href="/products" class="view-all">
-            View all →
+        <a href="/products" class="section-link">
+            View marketplace →
         </a>
 
     </div>
 
 
-    <div class="product-grid">
+    <div class="category-grid">
+
+        <a href="/products?search=CI/CD" class="category-card">
+            <div class="category-icon">⚙️</div>
+            <span>01</span>
+            <h3>CI/CD</h3>
+            <p>
+                Automate build, test, and deployment pipelines.
+            </p>
+        </a>
+
+
+        <a href="/products?search=Containers" class="category-card">
+            <div class="category-icon">🐳</div>
+            <span>02</span>
+            <h3>Containers</h3>
+            <p>
+                Package and orchestrate modern applications.
+            </p>
+        </a>
+
+
+        <a href="/products?search=Cloud" class="category-card">
+            <div class="category-icon">☁️</div>
+            <span>03</span>
+            <h3>Cloud</h3>
+            <p>
+                Build scalable infrastructure across cloud platforms.
+            </p>
+        </a>
+
+
+        <a href="/products?search=Monitoring" class="category-card">
+            <div class="category-icon">📈</div>
+            <span>04</span>
+            <h3>Observability</h3>
+            <p>
+                Monitor systems, applications, and platform health.
+            </p>
+        </a>
+
+    </div>
+
+</section>
+
+
+<section class="home-section featured-home">
+
+    <div class="section-header">
+
+        <div>
+            <span class="section-kicker">
+                FEATURED TECHNOLOGIES
+            </span>
+
+            <h2>
+                Start building your toolkit.
+            </h2>
+        </div>
+
+        <a href="/products" class="section-link">
+            Browse all →
+        </a>
+
+    </div>
+
+
+    <div class="featured-grid">
 
         {% for product in products %}
 
-        <div class="product-card">
+        <a
+            href="/products/{{ product['id'] }}"
+            class="featured-card"
+        >
 
-            <div class="product-icon">
-                ⚙️
+            <div class="featured-top">
+
+                <div class="featured-icon">
+                    ⚡
+                </div>
+
+                <span class="arrow">
+                    ↗
+                </span>
+
             </div>
 
-            <h2>{{ product["name"] }}</h2>
-
-            <p class="category">
+            <span class="featured-category">
                 {{ product["category"] }}
-            </p>
+            </span>
+
+            <h3>
+                {{ product["name"] }}
+            </h3>
 
             <p>
                 {{ product["description"] }}
             </p>
 
-            <h3>
-                ${{ "%.2f"|format(product["price"]) }}
-            </h3>
+            <div class="featured-footer">
 
-            <a
-                href="/products/{{ product['id'] }}"
-                class="button"
-            >
-                View Product
-            </a>
+                <strong>
+                    ${{ "%.2f"|format(product["price"]) }}
+                </strong>
 
-        </div>
+                <span>
+                    Explore
+                </span>
+
+            </div>
+
+        </a>
 
         {% endfor %}
 
@@ -125,32 +246,30 @@ DevOpsMart - DevOps & Cloud Marketplace
 </section>
 
 
-<section class="platform-section">
+<section class="home-cta">
 
-    <div class="platform-card">
+    <div>
 
-        <div class="platform-icon">
-            🚀
-        </div>
+        <span class="section-kicker">
+            HANDS-ON DEVOPS
+        </span>
 
-        <div>
-            <p class="section-label">BUILT FOR PRACTICE</p>
+        <h2>
+            Learn the technology by building with it.
+        </h2>
 
-            <h2>
-                Learn DevOps by building with real technologies.
-            </h2>
-
-            <p>
-                From containers and Kubernetes to infrastructure,
-                monitoring, messaging, APIs, and CI/CD.
-            </p>
-        </div>
-
-        <a href="/products" class="button">
-            Start Exploring
-        </a>
+        <p>
+            DevOpsMart is designed as a practical environment
+            for exploring CI/CD, containers, Kubernetes, cloud,
+            infrastructure, messaging, APIs, and observability.
+        </p>
 
     </div>
+
+    <a href="/products" class="primary-action">
+        Start Exploring
+        <span>→</span>
+    </a>
 
 </section>
 

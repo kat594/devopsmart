@@ -1,74 +1,121 @@
 {% extends "base.html" %}
 
 {% block title %}
-DevOpsMart - Order #{{ order["id"] }}
+DevOpsMart - Deployment #{{ order["id"] }}
 {% endblock %}
 
 {% block content %}
 
-<h1>Order #{{ order["id"] }}</h1>
+<div class="order-detail-page">
 
-<div class="product-card">
+    <div class="order-detail-top">
 
-    <h2>Customer Information</h2>
+        <div>
+            <a href="/orders" class="back-to-orders">
+                ← Deployment History
+            </a>
 
-    <p>
-        Name:
-        <strong>{{ order["customer_name"] }}</strong>
-    </p>
+            <span class="detail-eyebrow">DEPLOYMENT RECORD</span>
 
-    <p>
-        Email:
-        {{ order["customer_email"] }}
-    </p>
+            <h1>Deployment #{{ order["id"] }}</h1>
 
-    <p>
-        Status:
-        <strong>{{ order["status"] }}</strong>
-    </p>
+            <p>
+                Details of your provisioned DevOps technology toolkit.
+            </p>
+        </div>
 
-</div>
-
-
-<div class="product-card">
-
-    <h2>Order Items</h2>
-
-    {% for item in items %}
-
-    <div>
-
-        <h3>
-            {{ item["product_name"] }}
-        </h3>
-
-        <p>
-            Quantity: {{ item["quantity"] }}
-        </p>
-
-        <p>
-            Price: ${{ "%.2f"|format(item["price"]) }}
-        </p>
-
-        <p>
-            Item Total:
-            ${{ "%.2f"|format(item["price"] * item["quantity"]) }}
-        </p>
-
-        <hr>
+        <div class="detail-status">
+            {{ order["status"] }}
+        </div>
 
     </div>
 
-    {% endfor %}
 
-    <h2>
-        Total: ${{ "%.2f"|format(order["total"]) }}
-    </h2>
+    <div class="order-detail-layout">
+
+        <main class="deployment-items">
+
+            <div class="detail-section-title">
+                <span>01</span>
+                <div>
+                    <h2>Provisioned Technologies</h2>
+                    <p>Technologies included in this deployment request.</p>
+                </div>
+            </div>
+
+            <div class="deployment-item-list">
+
+                {% for item in items %}
+
+                <div class="deployment-item">
+
+                    <div class="deployment-item-icon">
+                        {{ item["product_name"][0:2]|upper }}
+                    </div>
+
+                    <div class="deployment-item-info">
+                        <strong>{{ item["product_name"] }}</strong>
+                        <span>DevOps Technology</span>
+                    </div>
+
+                    <div class="deployment-item-quantity">
+                        <span>QUANTITY</span>
+                        <strong>{{ item["quantity"] }}</strong>
+                    </div>
+
+                    <div class="deployment-item-price">
+                        <span>ITEM TOTAL</span>
+                        <strong>
+                            ${{ "%.2f"|format(item["price"] * item["quantity"]) }}
+                        </strong>
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </main>
+
+
+        <aside class="deployment-sidebar">
+
+            <section class="detail-info-card">
+
+                <span class="detail-card-eyebrow">REQUESTOR</span>
+
+                <h2>Customer Information</h2>
+
+                <div class="detail-info-row">
+                    <span>Name</span>
+                    <strong>{{ order["customer_name"] }}</strong>
+                </div>
+
+                <div class="detail-info-row">
+                    <span>Email</span>
+                    <strong>{{ order["customer_email"] }}</strong>
+                </div>
+
+            </section>
+
+
+            <section class="detail-total-card">
+
+                <span class="detail-card-eyebrow">DEPLOYMENT VALUE</span>
+
+                <span class="detail-total-label">Total</span>
+
+                <strong class="detail-total">
+                    ${{ "%.2f"|format(order["total"]) }}
+                </strong>
+
+            </section>
+
+        </aside>
+
+    </div>
 
 </div>
-
-<a href="/orders" class="button">
-    Back to Orders
-</a>
 
 {% endblock %}

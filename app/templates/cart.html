@@ -1,85 +1,152 @@
 {% extends "base.html" %}
 
 {% block title %}
-DevOpsMart - Cart
+DevOpsMart - Deployment Basket
 {% endblock %}
 
 {% block content %}
 
-<h1>Your Cart</h1>
+<div class="cart-page">
 
-{% if cart_items %}
-
-<div class="product-grid">
-
-    {% for item in cart_items %}
-
-    <div class="product-card">
-
-        <div class="product-icon">
-            ⚙️
-        </div>
-
-        <h2>{{ item["product"]["name"] }}</h2>
-
-        <p class="category">
-            {{ item["product"]["category"] }}
-        </p>
-
-        <p>
-            Quantity: {{ item["quantity"] }}
-        </p>
-
+    <div class="cart-header">
         <div>
-            <form method="POST" action="/cart/decrease/{{ item['product']['id'] }}" style="display:inline;">
-                <button type="submit" class="button">
-                    −
-                </button>
-            </form>
-
-            <form method="POST" action="/cart/add/{{ item['product']['id'] }}" style="display:inline;">
-                <button type="submit" class="button">
-                    +
-                </button>
-            </form>
-
-            <form method="POST" action="/cart/remove/{{ item['product']['id'] }}" style="display:inline;">
-                <button type="submit" class="button">
-                    Remove
-                </button>
-            </form>
+            <span class="cart-eyebrow">DEVOPS TOOLKIT</span>
+            <h1>Deployment Basket</h1>
+            <p>Review the technologies you want to include in your DevOps toolkit.</p>
         </div>
 
-        <p>
-            Price: ${{ "%.2f"|format(item["product"]["price"]) }}
-        </p>
+        <a href="/products" class="continue-shopping">
+            ← Browse Technologies
+        </a>
+    </div>
 
-        <h3>
-            ${{ "%.2f"|format(item["item_total"]) }}
-        </h3>
+    {% if cart_items %}
+
+    <div class="cart-layout">
+
+        <section class="cart-items">
+
+            {% for item in cart_items %}
+
+            <div class="cart-item">
+
+                <div class="cart-item-identity">
+
+                    <div class="cart-item-icon">
+                        {{ item["product"]["name"][0:2]|upper }}
+                    </div>
+
+                    <div>
+                        <h2>{{ item["product"]["name"] }}</h2>
+
+                        <span class="cart-item-category">
+                            {{ item["product"]["category"] }}
+                        </span>
+                    </div>
+
+                </div>
+
+                <div class="cart-item-price">
+                    <span>Unit Price</span>
+                    <strong>
+                        ${{ "%.2f"|format(item["product"]["price"]) }}
+                    </strong>
+                </div>
+
+                <div class="cart-quantity">
+
+                    <span>Quantity</span>
+
+                    <div class="quantity-controls">
+
+                        <form method="POST"
+                              action="/cart/decrease/{{ item['product']['id'] }}">
+                            <button type="submit">−</button>
+                        </form>
+
+                        <strong>{{ item["quantity"] }}</strong>
+
+                        <form method="POST"
+                              action="/cart/add/{{ item['product']['id'] }}">
+                            <button type="submit">+</button>
+                        </form>
+
+                    </div>
+
+                </div>
+
+                <div class="cart-item-total">
+                    <span>Total</span>
+                    <strong>
+                        ${{ "%.2f"|format(item["item_total"]) }}
+                    </strong>
+                </div>
+
+                <form method="POST"
+                      action="/cart/remove/{{ item['product']['id'] }}">
+
+                    <button type="submit" class="remove-item">
+                        Remove
+                    </button>
+
+                </form>
+
+            </div>
+
+            {% endfor %}
+
+        </section>
+
+        <aside class="cart-summary">
+
+            <span class="summary-eyebrow">ORDER SUMMARY</span>
+
+            <h2>Toolkit Summary</h2>
+
+            <div class="summary-line">
+                <span>Technologies</span>
+                <strong>{{ cart_items|length }}</strong>
+            </div>
+
+            <div class="summary-divider"></div>
+
+            <div class="summary-total">
+                <span>Total</span>
+                <strong>${{ "%.2f"|format(total) }}</strong>
+            </div>
+
+            <a href="/checkout" class="checkout-button">
+                Proceed to Provision →
+            </a>
+
+            <p class="summary-note">
+                Your selected technologies will be reviewed before provisioning.
+            </p>
+
+        </aside>
 
     </div>
 
-    {% endfor %}
+    {% else %}
+
+    <div class="empty-cart">
+
+        <div class="empty-cart-icon">+</div>
+
+        <h2>Your deployment basket is empty</h2>
+
+        <p>
+            Browse the technology marketplace and build your DevOps toolkit.
+        </p>
+
+        <a href="/products" class="checkout-button">
+            Browse Technologies →
+        </a>
+
+    </div>
+
+    {% endif %}
 
 </div>
-
-<h2>
-    Cart Total: ${{ "%.2f"|format(total) }}
-</h2>
-
-<a href="/checkout" class="button">
-    Proceed to Checkout
-</a>
-
-{% else %}
-
-<p>Your cart is empty.</p>
-
-<a href="/products" class="button">
-    Continue Shopping
-</a>
-
-{% endif %}
 
 {% endblock %}

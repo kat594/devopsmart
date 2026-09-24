@@ -1,47 +1,69 @@
 {% extends "base.html" %}
 
 {% block title %}
-DevOpsMart - Order Confirmed
+DevOpsMart - Deployment Complete
 {% endblock %}
 
 {% block content %}
 
-<div class="product-card">
+<div class="success-page">
 
-    <div class="product-icon large">
-        ✅
+    <div class="success-status">
+        <div class="success-check">✓</div>
+        <span>DEPLOYMENT REQUEST ACCEPTED</span>
     </div>
 
-    <h1>Order Confirmed!</h1>
+    <h1>Toolkit Provisioned</h1>
 
-    <p>
-        Thank you for your order, {{ order["customer_name"] }}.
+    <p class="success-message">
+        Your DevOps toolkit request has been successfully recorded.
     </p>
 
-    <p>
-        Your order number is:
-        <strong>#{{ order["id"] }}</strong>
-    </p>
+    <div class="success-card">
 
-    <p>
-        Confirmation email:
-        <strong>{{ order["customer_email"] }}</strong>
-    </p>
+        <div class="success-card-header">
+            <div>
+                <span>DEPLOYMENT RECORD</span>
+                <h2>Order #{{ order["id"] }}</h2>
+            </div>
 
-    <h2>
-        Total: ${{ "%.2f"|format(order["total"]) }}
-    </h2>
+            <div class="success-state">
+                {{ order["status"] }}
+            </div>
+        </div>
 
-    <p>
-        Status:
-        <strong>{{ order["status"] }}</strong>
-    </p>
+        <div class="success-details">
 
-    <br>
+            <div>
+                <span>REQUESTED BY</span>
+                <strong>{{ order["customer_name"] }}</strong>
+            </div>
 
-    <a href="/products" class="button">
-        Continue Shopping
-    </a>
+            <div>
+                <span>CONFIRMATION EMAIL</span>
+                <strong>{{ order["customer_email"] }}</strong>
+            </div>
+
+            <div>
+                <span>ORDER TOTAL</span>
+                <strong>${{ "%.2f"|format(order["total"]) }}</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="success-actions">
+
+        <a href="/orders" class="primary-success-button">
+            View Deployment History →
+        </a>
+
+        <a href="/products" class="secondary-success-button">
+            Browse Technologies
+        </a>
+
+    </div>
 
 </div>
 

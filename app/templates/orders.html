@@ -1,60 +1,86 @@
 {% extends "base.html" %}
 
 {% block title %}
-DevOpsMart - Orders
+DevOpsMart - Deployment History
 {% endblock %}
 
 {% block content %}
 
-<h1>Order History</h1>
+<div class="orders-page">
 
-{% if orders %}
+    <div class="orders-header">
 
-<div class="product-grid">
-
-    {% for order in orders %}
-
-    <div class="product-card">
-
-        <div class="product-icon">
-            📦
+        <div>
+            <span class="orders-eyebrow">DEVOPS OPERATIONS</span>
+            <h1>Deployment History</h1>
+            <p>Track your previously provisioned DevOps technology toolkits.</p>
         </div>
 
-        <h2>Order #{{ order["id"] }}</h2>
-
-        <p>
-            Customer:
-            <strong>{{ order["customer_name"] }}</strong>
-        </p>
-
-        <p>
-            Email:
-            {{ order["customer_email"] }}
-        </p>
-
-        <p>
-            Status:
-            <strong>{{ order["status"] }}</strong>
-        </p>
-
-        <h3>
-            ${{ "%.2f"|format(order["total"]) }}
-        </h3>
-
-        <a href="/orders/{{ order['id'] }}" class="button">
-            View Order
+        <a href="/products" class="orders-browse-button">
+            + Add Technologies
         </a>
 
     </div>
 
-    {% endfor %}
+    {% if orders %}
+
+    <div class="orders-list">
+
+        {% for order in orders %}
+
+        <a href="/orders/{{ order['id'] }}" class="order-row">
+
+            <div class="order-number">
+                <span>DEPLOYMENT</span>
+                <strong>#{{ order["id"] }}</strong>
+            </div>
+
+            <div class="order-customer">
+                <span>REQUESTED BY</span>
+                <strong>{{ order["customer_name"] }}</strong>
+                <small>{{ order["customer_email"] }}</small>
+            </div>
+
+            <div class="order-status">
+                <span>STATUS</span>
+                <strong>{{ order["status"] }}</strong>
+            </div>
+
+            <div class="order-total">
+                <span>TOTAL</span>
+                <strong>${{ "%.2f"|format(order["total"]) }}</strong>
+            </div>
+
+            <div class="order-arrow">
+                →
+            </div>
+
+        </a>
+
+        {% endfor %}
+
+    </div>
+
+    {% else %}
+
+    <div class="orders-empty">
+
+        <div class="orders-empty-icon">—</div>
+
+        <h2>No deployments yet</h2>
+
+        <p>
+            Your deployment history will appear here after you provision a toolkit.
+        </p>
+
+        <a href="/products" class="orders-browse-button">
+            Browse Technologies →
+        </a>
+
+    </div>
+
+    {% endif %}
 
 </div>
-
-{% else %}
-
-<p>No orders found.</p>
-
-{% endif %}
 
 {% endblock %}
