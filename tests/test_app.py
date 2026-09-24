@@ -54,3 +54,18 @@ def test_product_not_found():
     response = client.get("/products/9999")
 
     assert response.status_code == 404
+
+
+def test_ready():
+    app = create_app()
+    client = app.test_client()
+
+    response = client.get("/ready")
+
+    assert response.status_code == 200
+
+    data = response.get_json()
+
+    assert data["status"] == "ready"
+    assert data["application"] == "DevOpsMart"
+    assert data["database"] == "connected"

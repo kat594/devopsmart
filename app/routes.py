@@ -374,3 +374,28 @@ def order_detail(order_id):
         order=order,
         items=items
     )
+
+
+@main.route("/ready")
+def ready():
+    try:
+        connection = get_db_connection()
+
+        connection.execute(
+            "SELECT 1"
+        )
+
+        connection.close()
+
+        return jsonify({
+            "status": "ready",
+            "application": "DevOpsMart",
+            "database": "connected"
+        })
+
+    except Exception:
+        return jsonify({
+            "status": "not_ready",
+            "application": "DevOpsMart",
+            "database": "unavailable"
+        }), 503
