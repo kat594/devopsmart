@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}
+DevOpsMart - Home
+{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+
+    <h1>Welcome to DevOpsMart</h1>
+
+    <p>
+        Your one-stop shop for DevOps and Cloud technologies.
+    </p>
+
+    <a href="/products" class="button">
+        Explore DevOps Tools
+    </a>
+
+</section>
+
+
+<section>
+
+    <h2>Featured DevOps Tools</h2>
+
+    <div class="product-grid">
+
+        {% for product in products %}
+
+        <div class="product-card">
+
+            <div class="product-icon">
+                ⚙️
+            </div>
+
+            <h3>{{ product["name"] }}</h3>
+
+            <p class="category">
+                {{ product["category"] }}
+            </p>
+
+            <p>
+                {{ product["description"] }}
+            </p>
+
+            <h3>
+                ${{ "%.2f"|format(product["price"]) }}
+            </h3>
+
+            <a
+                href="/products/{{ product['id'] }}"
+                class="button"
+            >
+                View Product
+            </a>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endblock %}

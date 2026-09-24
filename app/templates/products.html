@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}
+DevOpsMart - Products
+{% endblock %}
+
+{% block content %}
+
+<h1>DevOps Tools</h1>
+
+<div class="product-grid">
+
+    {% for product in products %}
+
+    <div class="product-card">
+
+        <div class="product-icon">
+            ⚙️
+        </div>
+
+        <h2>{{ product["name"] }}</h2>
+
+        <p class="category">
+            {{ product["category"] }}
+        </p>
+
+        <p>
+            {{ product["description"] }}
+        </p>
+
+        <h3>
+            ${{ "%.2f"|format(product["price"]) }}
+        </h3>
+
+        <a
+            href="/products/{{ product['id'] }}"
+            class="button"
+        >
+            View Details
+        </a>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ product["name"] }} - DevOpsMart
+{% endblock %}
+
+{% block content %}
+
+<div class="product-detail">
+
+    <div class="product-icon large">
+        ⚙️
+    </div>
+
+    <div>
+
+        <h1>{{ product["name"] }}</h1>
+
+        <p class="category">
+            {{ product["category"] }}
+        </p>
+
+        <p>
+            {{ product["description"] }}
+        </p>
+
+        <h2>
+            ${{ "%.2f"|format(product["price"]) }}
+        </h2>
+
+        <button class="button">
+            Add to Cart
+        </button>
+
+    </div>
+
+</div>
+
+{% endblock %}
