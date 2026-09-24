@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}
+DevOpsMart - Checkout
+{% endblock %}
+
+{% block content %}
+
+<h1>Checkout</h1>
+
+<div class="product-card">
+
+    <h2>Order Summary</h2>
+
+    {% for item in cart_items %}
+
+    <p>
+        {{ item["product"]["name"] }}
+        × {{ item["quantity"] }}
+        — ${{ "%.2f"|format(item["item_total"]) }}
+    </p>
+
+    {% endfor %}
+
+    <hr>
+
+    <h2>
+        Total: ${{ "%.2f"|format(total) }}
+    </h2>
+
+</div>
+
+
+<div class="product-card">
+
+    <h2>Customer Information</h2>
+
+    <form method="POST" action="/checkout">
+
+        <p>
+            <label for="customer_name">
+                Name
+            </label>
+        </p>
+
+        <input
+            type="text"
+            id="customer_name"
+            name="customer_name"
+            required
+        >
+
+        <p>
+            <label for="customer_email">
+                Email
+            </label>
+        </p>
+
+        <input
+            type="email"
+            id="customer_email"
+            name="customer_email"
+            required
+        >
+
+        <br><br>
+
+        <button type="submit" class="button">
+            Place Order
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}

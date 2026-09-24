@@ -28,9 +28,11 @@
             ${{ "%.2f"|format(product["price"]) }}
         </h2>
 
-        <button class="button">
-            Add to Cart
-        </button>
+        <form method="POST" action="/cart/add/{{ product['id'] }}">
+            <button type="submit" class="button">
+                Add to Cart
+            </button>
+        </form>
 
     </div>
 

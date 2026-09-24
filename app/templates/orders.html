@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}
+DevOpsMart - Orders
+{% endblock %}
+
+{% block content %}
+
+<h1>Order History</h1>
+
+{% if orders %}
+
+<div class="product-grid">
+
+    {% for order in orders %}
+
+    <div class="product-card">
+
+        <div class="product-icon">
+            📦
+        </div>
+
+        <h2>Order #{{ order["id"] }}</h2>
+
+        <p>
+            Customer:
+            <strong>{{ order["customer_name"] }}</strong>
+        </p>
+
+        <p>
+            Email:
+            {{ order["customer_email"] }}
+        </p>
+
+        <p>
+            Status:
+            <strong>{{ order["status"] }}</strong>
+        </p>
+
+        <h3>
+            ${{ "%.2f"|format(order["total"]) }}
+        </h3>
+
+        <a href="/orders/{{ order['id'] }}" class="button">
+            View Order
+        </a>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% else %}
+
+<p>No orders found.</p>
+
+{% endif %}
+
+{% endblock %}

@@ -1,1 +1,48 @@
+{% extends "base.html" %}
 
+{% block title %}
+DevOpsMart - Order Confirmed
+{% endblock %}
+
+{% block content %}
+
+<div class="product-card">
+
+    <div class="product-icon large">
+        ✅
+    </div>
+
+    <h1>Order Confirmed!</h1>
+
+    <p>
+        Thank you for your order, {{ order["customer_name"] }}.
+    </p>
+
+    <p>
+        Your order number is:
+        <strong>#{{ order["id"] }}</strong>
+    </p>
+
+    <p>
+        Confirmation email:
+        <strong>{{ order["customer_email"] }}</strong>
+    </p>
+
+    <h2>
+        Total: ${{ "%.2f"|format(order["total"]) }}
+    </h2>
+
+    <p>
+        Status:
+        <strong>{{ order["status"] }}</strong>
+    </p>
+
+    <br>
+
+    <a href="/products" class="button">
+        Continue Shopping
+    </a>
+
+</div>
+
+{% endblock %}

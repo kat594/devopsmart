@@ -1,29 +1,89 @@
 {% extends "base.html" %}
 
 {% block title %}
-DevOpsMart - Home
+DevOpsMart - DevOps & Cloud Marketplace
 {% endblock %}
 
 {% block content %}
 
 <section class="hero">
 
-    <h1>Welcome to DevOpsMart</h1>
+    <div class="hero-content">
 
-    <p>
-        Your one-stop shop for DevOps and Cloud technologies.
-    </p>
+        <div class="hero-badge">
+            ⚡ DEVOPS & CLOUD MARKETPLACE
+        </div>
 
-    <a href="/products" class="button">
-        Explore DevOps Tools
-    </a>
+        <h1>
+            Build. Deploy.
+            <span>Scale.</span>
+        </h1>
+
+        <p>
+            Explore the technologies powering modern DevOps,
+            cloud infrastructure, automation, and observability.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="/products" class="button">
+                Explore DevOps Tools
+            </a>
+
+            <a href="/api/products" class="button secondary-button">
+                View API
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="floating-orbit">
+
+        <div class="floating-card card-one">
+            🐳
+            <span>Docker</span>
+        </div>
+
+        <div class="floating-card card-two">
+            ☸️
+            <span>Kubernetes</span>
+        </div>
+
+        <div class="floating-card card-three">
+            ☁️
+            <span>Cloud</span>
+        </div>
+
+        <div class="floating-card card-four">
+            📊
+            <span>Observability</span>
+        </div>
+
+        <div class="orbit-center">
+            ⚙️
+        </div>
+
+    </div>
 
 </section>
 
 
-<section>
+<section class="featured-section">
 
-    <h2>Featured DevOps Tools</h2>
+    <div class="section-heading">
+
+        <div>
+            <p class="section-label">EXPLORE THE ECOSYSTEM</p>
+            <h2>Featured DevOps Tools</h2>
+        </div>
+
+        <a href="/products" class="view-all">
+            View all →
+        </a>
+
+    </div>
+
 
     <div class="product-grid">
 
@@ -35,7 +95,7 @@ DevOpsMart - Home
                 ⚙️
             </div>
 
-            <h3>{{ product["name"] }}</h3>
+            <h2>{{ product["name"] }}</h2>
 
             <p class="category">
                 {{ product["category"] }}
@@ -59,6 +119,36 @@ DevOpsMart - Home
         </div>
 
         {% endfor %}
+
+    </div>
+
+</section>
+
+
+<section class="platform-section">
+
+    <div class="platform-card">
+
+        <div class="platform-icon">
+            🚀
+        </div>
+
+        <div>
+            <p class="section-label">BUILT FOR PRACTICE</p>
+
+            <h2>
+                Learn DevOps by building with real technologies.
+            </h2>
+
+            <p>
+                From containers and Kubernetes to infrastructure,
+                monitoring, messaging, APIs, and CI/CD.
+            </p>
+        </div>
+
+        <a href="/products" class="button">
+            Start Exploring
+        </a>
 
     </div>
 
