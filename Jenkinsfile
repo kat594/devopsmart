@@ -15,6 +15,12 @@ pipeline {
             }
         }
 
+        stage('Initialize Database') {
+            steps {
+                sh 'python3 scripts/seed.py'
+            }
+        }
+
         stage('Run Tests') {
             steps {
                 sh '.venv/bin/pytest -q'
