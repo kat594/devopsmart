@@ -50,5 +50,13 @@ pipeline {
                 '''
             }
         }
+        stage('Health Check') {
+            steps {
+                sh '''
+                    sleep 3
+                    curl -f http://localhost:5000
+                '''
+            }
+        }
     }
 }
