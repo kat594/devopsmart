@@ -27,9 +27,23 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
+        stage('Build and Push Docker Image') {
             steps {
-                sh 'docker build -t devopsmart:${BUILD_NUMBER} .'
+                script {
+                    withCredentials([usernamePassword(
+                        credentialsId: 'dockerhub-creds',
+                        usernameVariable: 'DOCKERHUB_USERNAME',
+                        passwordVariable: 'DOCKERHUB_TOKEN'
+                    )]) {
+                        sh '''
+                            echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+                            docker build -t devopsmart:${BUILD_NUMBER} .
+                            docker tag devopsmart:${BUILD_NUMBER} ${DOCKERHUB_USERNAME}/devopsmart:${BUILD_NUMBER}
+                            docker push ${DOCKERHUB_USERNAME}/devopsmart:${BUILD_NUMBER}
+                            docker logout
+                        '''
+                    }
+                }
             }
         }
     }
