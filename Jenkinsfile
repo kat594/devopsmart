@@ -59,4 +59,18 @@ pipeline {
             }
         }
     }
+
+    post {
+        success {
+            echo 'DevOpsMart pipeline completed successfully.'
+        }
+
+        failure {
+            echo 'DevOpsMart pipeline failed.'
+        }
+
+        always {
+            cleanWs()
+        }
+    }
 }
