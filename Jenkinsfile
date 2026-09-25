@@ -54,7 +54,7 @@ pipeline {
             steps {
                 sh '''
                     sleep 3
-                    curl -f http://localhost:5000
+                    curl -f -s -o /dev/null -w "Health Check: HTTP %{http_code}\n" http://localhost:5000
                 '''
             }
         }
