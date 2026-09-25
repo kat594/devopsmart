@@ -17,7 +17,7 @@ pipeline {
 
         stage('Initialize Database') {
             steps {
-                sh 'python3 scripts/seed.py'
+                sh '.venv/bin/python scripts/seed.py'
             }
         }
 
