@@ -26,5 +26,11 @@ pipeline {
                 sh '.venv/bin/pytest -q'
             }
         }
+
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t devopsmart:${BUILD_NUMBER} .'
+            }
+        }
     }
 }
