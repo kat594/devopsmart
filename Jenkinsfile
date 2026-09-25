@@ -46,5 +46,15 @@ pipeline {
                 }
             }
         }
+        stage('Deploy') {
+            steps {
+                sh '''
+                    docker pull kat594/devopsmart:${BUILD_NUMBER}
+                    docker stop devopsmart || true
+                    docker rm devopsmart || true
+                    docker run -d --name devopsmart -p 5000:5000 kat594/devopsmart:${BUILD_NUMBER}
+                '''
+            }
+        }
     }
 }
